@@ -35,6 +35,8 @@
 
 ### Return Value Key Table<br>매개변수 키 목록
 
+* If one (or more) of the assignment functions return a dictionary with multiple values, please describe the return value keys.<br>과제 함수 중 하나가(또는 여럿이) 여러 값을 담은 `dict`를 반환하는 경우, 반환값 키에 대해 설명하십시오.
+
 | return value key<br>반환값 key | type<br>형 |unit<br>단위 | value |
 |:--------:|:-----------:|:-----------:|:-----------:|
 | `'a_moment_above'` | `float` | $m^3$ | area moment of the section above the centroid. (>0)<br>중립축 위의 면적 모멘트. (>0) |
