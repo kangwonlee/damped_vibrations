@@ -33,6 +33,15 @@
 | `x0` | `float` | $m$ | The width of the cross-section.<br> 단면의 폭. |
 | `x1` | `float` | $m$ | The height of the cross-section.<br> 단면의 높이. |
 
+### Return Value Key Table<br>매개변수 키 목록
+
+| return value key<br>반환값 key | type<br>형 |unit<br>단위 | value |
+|:--------:|:-----------:|:-----------:|:-----------:|
+| `'a_moment_above'` | `float` | $m^3$ | area moment of the section above the centroid. (>0)<br>중립축 위의 면적 모멘트. (>0) |
+| `'a_moment_below'` | `float` | $m^3$ | area moment of the section below the centroid. (>0)<br>중립축 아래의 면적 모멘트. (>0) |
+| `'close'` | `bool` | - | whether these two area moments are close to each other?<br>두 면적 모멘트가 가까운가? |
+
+
 ## Grading<br>평가
 
 * Description of the grading.<br>평가에 대한 설명입니다.
