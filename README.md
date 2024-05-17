@@ -46,6 +46,13 @@
 
 * Description of the grading.<br>평가에 대한 설명입니다.
 
+| Criteria<br>기준	| Points<br>배점 |
+|:---------:|:------:|
+| Python Grammar<br>파이썬 문법	| 2 |
+| Coding Style<br>모든 코드는 함수 안에	| 1 |
+| Final Result<br>최종 결과	| 2 |
+
+
 ## Example<br>예
 
 * Description of the example.<br>예에 대한 설명입니다.
