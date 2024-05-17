@@ -17,6 +17,15 @@
 | `sample.py`           | Python   | Example Usage<br>사용 예 | This file demonstrates how to use the assignment code.<br>과제 코드 사용 예. | Read-Only<br>읽기 전용 |
 | `.github/workflows/` | YAML     | CI/CD Configuration<br>연속 통합/배포 설정 | Defines automated workflows for testing and deployment.<br>시험 배포 자동화 절차 설정. | Read-Only<br>읽기 전용 |
 | `tests/`              | Python   | Test Cases<br>시험 파일 | Tests to check the correctness of your code.<br>코드가 맞는지 시험. | Read-Only<br>읽기 전용 |
+
+### Function Table<br>함수 목록
+
+* Description of the functions of the `my_code_here.py` file.<br>`my_code_here.py` 파일의 함수에 대한 설명입니다.
+
+| function<br>함수 | return type<br>반환 형 | unit<br>단위 | return value<br>반환값 |
+|:--------:|:-----------:|:-----------:|:-----------:|
+| `f(x0, x1)` | `float` | $m^2$ | The area of the cross-section.<br> 단면의 전체 면적. |
+
 ## Grading<br>평가
 
 * Description of the grading.<br>평가에 대한 설명입니다.
