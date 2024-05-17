@@ -27,7 +27,14 @@ def test_example():
     input_value = 'Please set input arguments.\n입력 매개변수를 정하기 바랍니다.'
     result = mch.some_function(input_value)
     expected_output = 'Please set expected results.\n예상 결과를 정하기 바랍니다.'
-    assert result == expected_output
+    assert result == expected_output, (
+        f"Input arguments: {input_value}\n"
+        f"입력 매개변수 : {input_value}\n"
+        f"Expected: {expected_output}\n"
+        f"예상 결과: {expected_output}\n"
+        f"Got: {result}\n"
+        f"실제 결과: {result}"
+    )
 
 
 # Test another function from the 'my_code_here' module.
@@ -37,7 +44,14 @@ def test_another_example():
     input_value2 = 'Please set input arguments.\n입력 매개변수를 정하기 바랍니다.'
     result = mch.another_function(input_value1, input_value2)
     expected_output = 'Please set expected results.\n예상 결과를 정하기 바랍니다.'
-    assert result == expected_output
+    assert result == expected_output, (
+        f"Input arguments: {input_value1}, {input_value2}\n"
+        f"입력 매개변수 : {input_value1}, {input_value2}\n"
+        f"Expected: {expected_output}\n"
+        f"예상 결과: {expected_output}\n"
+        f"Got: {result}\n"
+        f"실제 결과: {result}"
+    )
 
 
 if __name__ == "__main__":
