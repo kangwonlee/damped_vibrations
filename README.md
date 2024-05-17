@@ -44,6 +44,14 @@
 | `'a_moment_below'` | `float` | $m^3$ | area moment of the section below the centroid. (>0)<br>중립축 아래의 면적 모멘트. (>0) |
 | `'close'` | `bool` | - | whether these two area moments are close to each other?<br>두 면적 모멘트가 가까운가? |
 
+### Allowed Modules<br>허용 모듈 목록
+
+* In the `my_code_here.py` file, please `import` these modules only.<br>`my_code_here.py` 파일에서는 아래 모듈만 `import` 바랍니다.
+
+| module<br>모듈 | description<br>설명 |
+|:--------:|:-----------:|
+| `math` | math functions<br>수학 함수 |
+
 
 ## Grading<br>평가
 
