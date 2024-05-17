@@ -26,6 +26,13 @@
 |:--------:|:-----------:|:-----------:|:-----------:|
 | `f(x0, x1)` | `float` | $m^2$ | The area of the cross-section.<br> 단면의 전체 면적. |
 
+### Argument Table<br>매개변수 목록
+
+| function<br>함수 | return type<br>반환 형 | unit<br>단위 | return value<br>반환값 |
+|:--------:|:-----------:|:-----------:|:-----------:|
+| `x0` | `float` | $m$ | The width of the cross-section.<br> 단면의 폭. |
+| `x1` | `float` | $m$ | The height of the cross-section.<br> 단면의 높이. |
+
 ## Grading<br>평가
 
 * Description of the grading.<br>평가에 대한 설명입니다.
