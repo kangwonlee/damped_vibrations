@@ -27,7 +27,7 @@
 |:--------:|:-----------:|:-----------:|:-----------:|
 | `f(x0, x1)` | `float` | $m^2$ | The area of the cross-section.<br> 단면의 전체 면적. |
 
-* Every line of the `my_code_here.py` file must be part of one of the functions.<br>`my_code_here.py` 파일의 모든 행은 함수의 일부여야 함.
+* Write all your code within the functions in `my_code_here.py`, but feel free to add comments outside the functions to explain your work.<br>`my_code_here.py` 의 모든 코드는 함수 안에 작성되어야 함. 예외로 설명을 위한 주석문은 함수 밖에 자유로이 추가할 수 있음.
 
 ### Argument Table<br>매개변수 목록
 
