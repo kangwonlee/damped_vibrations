@@ -21,13 +21,13 @@
 
 ### Function Table<br>함수 목록
 
-* Description of the functions of the `my_code_here.py` file.<br>`my_code_here.py` 파일의 함수에 대한 설명입니다.
+* Description of the function(s) of the `my_code_here.py` file.<br>`my_code_here.py` 파일의 함수에 대한 설명입니다.
 
 | function<br>함수 | return type<br>반환 형 | unit<br>단위 | return value<br>반환값 |
 |:--------:|:-----------:|:-----------:|:-----------:|
 | `f(x0, x1)` | `float` | $m^2$ | The area of the cross-section.<br> 단면의 전체 면적. |
 
-* Write all your code within the functions in `my_code_here.py`, but feel free to add comments outside the functions to explain your work.<br>`my_code_here.py` 의 모든 코드는 함수 안에 작성되어야 함. 예외로 설명을 위한 주석문은 함수 밖에 자유로이 추가할 수 있음.
+* Write all your code within the function(s) in `my_code_here.py`, but feel free to add comments outside the functions to explain your work.<br>`my_code_here.py` 의 모든 코드는 함수 안에 작성되어야 함. 예외로 설명을 위한 주석문은 함수 밖에 자유로이 추가할 수 있음.
 
 ### Argument Table<br>매개변수 목록
 
