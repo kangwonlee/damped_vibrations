@@ -106,7 +106,7 @@ Our team of expert analysts will be using Python's `solve_ivp` function to model
 
 ## Example<br>예
 
-* Description of the example.<br>예에 대한 설명입니다.
+* Please run `sample.py` file to see an example of how to use the functions and visualize the results. <br>해당 함수들의 사용법과 해당 결과를 시각화 하는 법에 대해서는 `sample.py` 를 실행시켜 보기 바랍니다.
 
 ## References<br>참고문헌
 
