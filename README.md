@@ -75,13 +75,13 @@ Our team of expert analysts will be using Python's `solve_ivp` function to model
 
 ### Return Value Key Table<br>매개변수 키 목록
 
-* If one (or more) of the assignment functions return a dictionary with multiple values, please describe the return value keys.<br>과제 함수 중 하나가(또는 여럿이) 여러 값을 담은 `dict`를 반환하는 경우, 반환값 키에 대해 설명하십시오.
+* `linear_solution()` and `nonlinear_solution()` functions are expected to return a `dict` of following keys.<br>과제 함수 중 `linear_solution()` 와(과) `nonlinear_solution()`는 아래 key를 담은 `dict`를 반환하시오.
 
 | return value key<br>반환값 key | type<br>형 |unit<br>단위 | value |
 |:--------:|:-----------:|:-----------:|:-----------:|
-| `'a_moment_above'` | `float` | $m^3$ | area moment of the section above the centroid. (>0)<br>중립축 위의 면적 모멘트. (>0) |
-| `'a_moment_below'` | `float` | $m^3$ | area moment of the section below the centroid. (>0)<br>중립축 아래의 면적 모멘트. (>0) |
-| `'close'` | `bool` | - | whether these two area moments are close to each other?<br>두 면적 모멘트가 가까운가? |
+| `'t_array'` | `numpy.ndarray` | $sec$ | Time array. <br>시간 배열. |
+| `'n'` | `int` | - | Length of the time array.<br>시간 배열의 길이. |
+| `'xv_array'` | `numpy.ndarray` | $m$, $m/s$ | Position and velocity array of dimension $2 \times n$. <br>크기 $2 \times n$ 인 위치, 속도 배열. |
 
 ### Allowed Modules<br>허용 모듈 목록
 
