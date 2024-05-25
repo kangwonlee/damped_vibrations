@@ -61,8 +61,8 @@ Our team of expert analysts will be using Python's `solve_ivp` function to model
 | `nonlinear_damping_force(c, v)` | `float` | $N$ | Nonlinear damping force.<br> 비선형 감쇠력. |
 | `linear_slope(t, xv, m, c, k)` | `numpy.ndarray` | $m/s$, $m/s/s$ | Callback function for the linear system.<br> 선형 진동계 콜백 함수. |
 | `nonlinear_slope(t, xv, m, c, k)` | `numpy.ndarray` | $m/s$, $m/s/s$ | Callback function for the nonlinear system.<br> 비선형 진동계 콜백 함수. |
-| `linear_solution(t_array, xv, xv0, m, c, k)` | - | $s$, $m$, $m/s$ | Solution curve for the linear system.<br> 선형 진동계 해 곡선 계산. |
-| `nonlinear_solution(t_array, xv, m, c, k)` | - | $s$, $m$, $m/s$ | Solution curve for the nonlinear system.<br> 비선형 진동계 해 곡선 계산. |
+| `linear_solution(t_array, xv0, m, c, k)` | - | $s$, $m$, $m/s$ | Solution curve for the linear system.<br> 선형 진동계 해 곡선 계산. |
+| `nonlinear_solution(t_array, xv0, m, c, k)` | - | $s$, $m$, $m/s$ | Solution curve for the nonlinear system.<br> 비선형 진동계 해 곡선 계산. |
 
 * Write all your code within the function(s) in `my_code_here.py`, but feel free to add comments outside the functions to explain your work.<br>`my_code_here.py` 의 모든 코드는 함수 안에 작성되어야 함. 예외로 설명을 위한 주석문은 함수 밖에 자유로이 추가할 수 있음.
 
