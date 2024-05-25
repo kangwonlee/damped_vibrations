@@ -70,8 +70,16 @@ Our team of expert analysts will be using Python's `solve_ivp` function to model
 
 | argument<br>매개변수 | return type<br>반환 형 | unit<br>단위 | return value<br>반환값 |
 |:--------:|:-----------:|:-----------:|:-----------:|
-| `x0` | `float` | $m$ | The width of the cross-section.<br> 단면의 폭. |
-| `x1` | `float` | $m$ | The height of the cross-section.<br> 단면의 높이. |
+| `t` | `float` | $sec$ | Time.<br> 시간. |
+| `t_array` | `numpy.ndarray` | $sec$ | Time array.<br> 시간 배열. |
+| `m` | `float` | $kg$ | Mass.<br> 질량. |
+| `c` | `float` | $N/(m/s)$ | Damping coefficient.<br> 감쇠 계수. |
+| `k` | `float` | $N/m$ | Spring coefficient.<br> 스프링 상수. |
+| `x` | `float` | $m$ | Position.<br> 위치. |
+| `v` | `float` | $m/s$ | derivative of the position.<br> 위치의 미분. |
+| `xv` | `numpy.ndarray` | $m$, $m/s$ | array containing the position and the speed.<br> 위치와 속도를 담은 배열. |
+| `xv0` | `numpy.ndarray` | $m$, $m/s$ | array containing the initial values.<br> 초기값 배열. |
+
 
 ### Return Value Key Table<br>매개변수 키 목록
 
