@@ -21,11 +21,21 @@ def sample_main():
     xv = np.array([x_m, v_mps])
     xv0 = np.array([x_m, 0.0])
 
-    print(
-        f"linear damping force example = {mch.linear_damping_force(c_Npmps, v_mps)}[N]\n"
-        f"nonlinear damping force example = {mch.nonlinear_damping_force(c_Npmps, v_mps)}[N]\n"
-    )
-    
+    v_array_mps = np.linspace(-v_mps, v_mps, 101)
+
+    linear_c_array_N = mch.linear_damping_force(c_Npmps, v_array_mps)
+    nonlinear_c_array_N = mch.nonlinear_damping_force(c_Npmps, v_array_mps)
+
+    # plot v vs damping force
+    plt.clf()
+    plt.plot(v_array_mps, linear_c_array_N, label="linear")
+    plt.plot(v_array_mps, nonlinear_c_array_N, label="nonlinear")
+    plt.xlabel("v[m/s]")
+    plt.ylabel("damping force [N]")
+    plt.legend(loc=0)
+    plt.grid(True)
+    plt.savefig("sample_damping_force.png")
+
     print(
         f"linear slope example = {mch.linear_slope(t_sec, xv, m_kg, c_Npmps, k_Npm)}[N]\n"
         f"nonlinear slope example = {mch.nonlinear_slope(t_sec, xv, m_kg, c_Npmps, k_Npm)}[N]\n"
@@ -52,7 +62,7 @@ def sample_main():
 
     axs[0].set_ylabel("x[m]")
     axs[1].set_ylabel("v[m/s]")
-    plt.savefig("sample.png")
+    plt.savefig("sample_solution.png")
 
 
 if "__main__" == __name__:
