@@ -119,7 +119,8 @@ Our team of expert analysts will be using Python's `solve_ivp` function to model
 
 ## References<br>참고문헌
 
-* References for the assignment.<br>과제에 대한 참고문헌입니다.
+* Harmonic oscillator [[wiki](https://en.wikipedia.org/wiki/Harmonic_oscillator)]<br>조화진동자 [[wiki](https://ko.wikipedia.org/wiki/조화_진동자)]
+* scipy.integrate.solve_ivp() [[link](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html)].
 
 **시청자 여러분, 감쇠 진동의 세계는 결코 지루하지 않습니다! 여러분의 빛나는 수치해석 실력으로 무한상사의 진동 문제를 해결하고, 숨겨진 진실을 밝혀내세요! 이상, SNL 특파원 주 기자였습니다!**
 
