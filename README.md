@@ -1,14 +1,46 @@
 
-# Title<br>과제 제목
+# Breaking News: Dunder Mifflin Plagued by Mysterious Oscillations!<br>속보입니다! 긴급 진동 발생! SNL 수치해석 특별 방송!
 
+"This just in! SNL's top field reporter is live at Dunder Mifflin's Scranton branch, where employees are experiencing a bizarre phenomenon: unexplained oscillations causing chaos throughout the office.  Sources say the vibrations are so intense that Dwight Schrute's bobblehead collection has been knocked off its shelf, and Stanley Hudson's crossword puzzle is now completely illegible. We're here to investigate the source of these oscillations and determine if they're a threat to the company's productivity (and sanity)."
 
-## Description<br>설명
+안녕하십니까, 시청자 여러분. 저는 SNL 특파원 주 기자입니다! 지금 막 무한상사에서 긴급 상황이 발생했습니다. 유재석 부장님의 격렬한 춤사위와 정준하 과장님의 폭풍 먹방으로 인해 사무실 전체가 흔들리고 있습니다. 이 엄청난 진동은 마치 지진이라도 난 듯 책상과 의자를 덜덜 떨게 만들고 있습니다.
 
-* Description of the assignment.<br>과제에 대한 설명입니다.
+하지만, 걱정하지 마십시오! 우리에겐 든든한 지원군, 파이썬의 `solve_ivp` 함수가 있습니다. 이 강력한 도구를 활용하면, 이 혼돈 속에서도 진동의 패턴을 분석하고 예측할 수 있습니다.
 
-## Implementation<br>구현
+**지금부터 저와 함께, 무한상사의 진동 현장을 수치해석으로 파헤쳐 봅시다!**
 
-* Description of the implementation.<br>구현에 대한 설명입니다.
+## Problem Description<br>현장 상황
+
+"Our sources have identified two potential culprits behind the Dunder Mifflin mayhem:
+
+1. Kevin's Chili Calamity (Linear Damping): Kevin Malone, the office's resident chili enthusiast, accidentally spilled a massive pot of his famous chili on the breakroom floor. The resulting waves of chili are causing the floor to oscillate, with the linoleum providing a linear damping force.<br>유재석 부장님의 댄스 타임: 유 부장님의 현란한 춤 동작은 책상을 좌우로 흔들리게 만들고 있습니다. 이 움직임은 시간이 지날수록 점차 줄어드는 선형 감쇠 진동으로 볼 수 있습니다. 마치 흥겨운 댄스곡이 끝나고 차분한 음악으로 넘어가는 것처럼 말이죠.
+1. Michael's Motivational Mayhem (Nonlinear Damping): Michael Scott, the self-proclaimed "World's Best Boss," has been conducting a series of impromptu motivational speeches and team-building exercises. The resulting chaos and confusion have caused the office to vibrate erratically, with a damping force that seems as unpredictable as Michael himself.<br>정준하 과장님의 먹방 퍼레이드: 정 과장님이 짜장면을 흡입하는 모습은 마치 진공청소기 같습니다. 이 엄청난 먹방은 의자를 앞뒤로 격렬하게 움직이게 만들고 있습니다. 이 움직임은 예측하기 어려운 비선형 감쇠 진동으로, 마치 박명수 차장님의 급발진 잔소리처럼 갑작스럽고 강렬합니다.
+
+Our team of expert analysts will be using Python's `solve_ivp` function to model these scenarios and determine the nature of the damping forces at play. We'll also be interviewing key witnesses (and potential suspects) to get to the bottom of this bizarre situation."
+ 
+**특종! 여러분도 수치해석 전문가가 될 수 있습니다!**
+
+## Tasks<br>미션
+
+1. Field Reporter's Toolkit: Get your Python environment set up with `solve_ivp` ready for action. It's time to channel your inner investigative journalist and uncover the truth behind the Dunder Mifflin oscillations.
+
+1. Implement Damping Functions:<br>감쇠 함수 구현
+
+    * Write a function `linear_damping_force(v, c)` that returns the linear damping force `c*v`, where `v` is the velocity and `c` is the damping coefficient.<br>`linear_damping_force(v, c)`: 선형 감쇠력 `c * v` 를 반환하는 함수 (`v`는 속도, `c`는 감쇠 계수).
+    * Write a function `nonlinear_damping_force(v, c)` that returns the nonlinear damping force `c*sign(v)`, where `sign(v)` is the signum function (`-1` for negative `v`, `0` for zero `v`, and `1` for positive `v`).<br>`nonlinear_damping_force(v, c)`: 비선형 감쇠력 `c * sign(v)`를 반환하는 함수 (`sign(v)`는 부호 함수)
+
+1. Solve the ODEs:<br>ODE의 해 곡선:
+
+    * Write a function `linear_damping_solution(t_eval, m, k, c, x0, v0)` that uses `solve_ivp` to solve the ODE for Kevin's chili spill with linear damping and returns the solution at specified time points `t_eval`.
+    * Write a function `nonlinear_damping_solution(t_eval, m, k, c, x0, v0)` that does the same for Meredith's office chair race with nonlinear damping.
+(Note: `m` is the mass, `k` is the spring constant, `x0` is the initial displacement, and `v0` is the initial velocity.)
+
+1. Breaking News Analysis:<br>결과 분석 및 비교:
+
+    * Plot and compare the displacement $x(t)$ and velocity $\frac{d}{dt}x(t)$ for both scenarios over a suitable time interval.<br>두 시나리오에 대한 변위 $x(t)$와 속도 $\frac{d}{dt}x(t)$를 그래프로 나타내고 비교 분석합니다.
+    * Discuss the observed differences and their physical interpretations in the context of "The Office." For example, you could relate the smooth decay of linear damping to Jim's calm demeanor and the erratic behavior of nonlinear damping to Michael's chaotic energy.<br>선형 감쇠와 비선형 감쇠의 차이점을 "무한상사"의 관점에서 이해해봅시다. 예를 들어 선형 감쇠의 부드러운 진폭 감소를 유재석 부장의 차분한 태도와 연결지어 생각해 볼 수 있고, 비선형 감쇠의 불규칙한 행동을 박명수 차장의 에너지 넘친 급발진과 비교해 볼 수도 있을 것입니다.
+
+1. Exclusive Interview (Bonus):  For those who want to go the extra mile, conduct a mock interview with a Dunder Mifflin employee (played by you or a friend). Get their perspective on the oscillations and their potential impact on office productivity. Extra points for incorporating iconic quotes and mannerisms from the show.
 
 ### File Table<br>파일 목록
 
@@ -23,9 +55,14 @@
 
 * Description of the function(s) of the `my_code_here.py` file.<br>`my_code_here.py` 파일의 함수에 대한 설명입니다.
 
-| function<br>함수 | return type<br>반환 형 | unit<br>단위 | return value<br>반환값 |
+| function<br>함수 | return type<br>반환 형 | return unit<br>반환값 단위 | return value<br>반환값 |
 |:--------:|:-----------:|:-----------:|:-----------:|
-| `f(x0, x1)` | `float` | $m^2$ | The area of the cross-section.<br> 단면의 전체 면적. |
+| `linear_damping_force(c, v)` | `float` | $N$ | Linear damping force.<br> 선형 감쇠력. |
+| `nonlinear_damping_force(c, v)` | `float` | $N$ | Nonlinear damping force.<br> 비선형 감쇠력. |
+| `linear_slope(t, xv, m, c, k)` | `numpy.ndarray` | $m/s$, $m/s/s$ | Callback function for the linear system.<br> 선형 진동계 콜백 함수. |
+| `nonlinear_slope(t, xv, m, c, k)` | `numpy.ndarray` | $m/s$, $m/s/s$ | Callback function for the nonlinear system.<br> 비선형 진동계 콜백 함수. |
+| `linear_solution(t_array, xv, xv0, m, c, k)` | - | $s$, $m$, $m/s$ | Solution curve for the linear system.<br> 선형 진동계 콜백 함수. |
+| `nonlinear_solution(t_array, xv, m, c, k)` | - | $s$, $m$, $m/s$ | Solution curve for the nonlinear system.<br> 비선형 진동계 콜백 함수. |
 
 * Write all your code within the function(s) in `my_code_here.py`, but feel free to add comments outside the functions to explain your work.<br>`my_code_here.py` 의 모든 코드는 함수 안에 작성되어야 함. 예외로 설명을 위한 주석문은 함수 밖에 자유로이 추가할 수 있음.
 
@@ -55,28 +92,31 @@
 | `math` | math functions<br>수학 함수 |
 
 
-## Grading<br>평가
+## Grading<br>채점 기준 (총 5점)
 
 * Description of the grading.<br>평가에 대한 설명입니다.
 
 | Criteria<br>기준	| Points<br>배점 |
 |:---------:|:------:|
-| Python Grammar<br>파이썬 문법	| 2 |
+| Python Grammar<br>Python 문법	| 1 |
 | Coding Style<br>모든 코드는 함수 안에	| 1 |
-| Final Result<br>최종 결과	| 2 |
+| Linear Results<br>선형 감쇠	| 2 |
+| Nonlinear Results<br>비선형 감쇠	| 1 |
 
 
 ## Example<br>예
 
 * Description of the example.<br>예에 대한 설명입니다.
 
-## Notes<br>참고사항
-
-* Additional notes.<br>추가적인 참고사항입니다.
-
 ## References<br>참고문헌
 
 * References for the assignment.<br>과제에 대한 참고문헌입니다.
+
+**시청자 여러분, 감쇠 진동의 세계는 결코 지루하지 않습니다! 여러분의 빛나는 수치해석 실력으로 무한상사의 진동 문제를 해결하고, 숨겨진 진실을 밝혀내세요! 이상, SNL 특파원 주 기자였습니다!**
+
+## Notes
+
+* This assignment was developed with the assistance of an AI language model for creative inspiration and guidance, demonstrating the potential of AI as a tool to enhance learning and problem-solving.  Students are encouraged to use AI responsibly and ethically, always prioritizing their own understanding and critical thinking.
 
 ## NOTICE REGARDING STUDENT SUBMISSIONS<br>제출 결과물에 대한 알림
 
