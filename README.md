@@ -89,7 +89,8 @@ Our team of expert analysts will be using Python's `solve_ivp` function to model
 
 | module<br>모듈 | description<br>설명 |
 |:--------:|:-----------:|
-| `math` | math functions<br>수학 함수 |
+| `numpy` | numpy |
+| `scipy.integrate` | numerical solver<br>수치 해법 |
 
 
 ## Grading<br>채점 기준 (총 5점)
