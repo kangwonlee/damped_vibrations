@@ -100,8 +100,8 @@ Our team of expert analysts will be using Python's `solve_ivp` function to model
 |:---------:|:------:|
 | Python Grammar<br>Python 문법	| 1 |
 | Coding Style<br>모든 코드는 함수 안에	| 1 |
-| Linear Results<br>선형 감쇠	| 2 |
-| Nonlinear Results<br>비선형 감쇠	| 1 |
+| Linear Results<br>선형 감쇠 결과	| 2 |
+| Nonlinear Results<br>비선형 감쇠 결과	| 1 |
 
 
 ## Example<br>예
