@@ -29,7 +29,7 @@ def test_syntax_validity(py_file:pathlib.Path):
 
 @pytest.fixture(scope="session")  # Session scope to share the allowed modules across tests
 def allowed_modules() -> Tuple[str]:
-    return ("math",)
+    return ("numpy", "scipy.integrate")
 
 
 def test_allowed_imports(py_file:pathlib.Path, allowed_modules:Tuple[str]):
