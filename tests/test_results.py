@@ -77,6 +77,13 @@ def test_nonlinear_damping_force(c, v, expected_force):
         f"입력 매개변수: c = {c:g}, v = {v:g}\n"
     )
 
+    assert isinstance(calculated_force, float),(
+        f"{msg_arg}Expected type: float\n"
+        f"예상 자료형: float\n"
+        f"Got type: {type(calculated_force)}\n"
+        f"받은 자료형: {type(calculated_force)}\n"
+    )
+
     # Check if sign of the calculated force matches the sign of velocity
     assert np.sign(calculated_force) == np.sign(v) or (v == 0 and calculated_force == 0), (
         f"{msg_arg}Force should have same sign as velocity (or be zero if v = 0)\n"
@@ -91,6 +98,16 @@ def test_nonlinear_damping_force(c, v, expected_force):
         f"{msg_arg}Magnitude of force should be equal to c\n"
         f"힘의 크기는 c와 같아야 합니다"
     )
+
+@pytest.mark.parametrize("t, x, v, m, c, k, expected_dxdt, expected_dvdt", [
+    (0.0, 1.0, 2.0, 1.0, 0.5, 10.0, 2.0, -15.0),
+    (2.5, -0.5, -1.0, 2.0, 1.5, 5.0, -1.0, 2.0),
+    (1.0, 0.0, 0.0, 0.8, 0.2, 8.0, 0.0, 0.0),
+])
+def test_linear_slope(t, x, v, m, c, k, expected_dxdt, expected_dvdt):
+    xv = np.array([x, v])  # Create the position-velocity array
+    calculated_slopes = mch.linear_slope(t, xv, m, c, k)
+    assert np.allclose(calculated_slopes, np.array([expected_dxdt, expected_dvdt]), rtol=1e-6)
 
 
 if __name__ == "__main__":
