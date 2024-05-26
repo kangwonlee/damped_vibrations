@@ -85,7 +85,7 @@ def test_nonlinear_damping_force(c, v, expected_force):
 
     # Check if magnitude of the force is constant (equal to c)
     assert (
-        np.isclose(abs(calculated_force), c, rtol=1e-6)
+        np.isclose(abs(calculated_force), expected_force, rtol=1e-6)
         or (v == 0 and calculated_force == 0)
     ), (
         f"{msg_arg}Magnitude of force should be equal to c\n"
