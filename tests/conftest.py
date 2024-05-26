@@ -26,3 +26,13 @@ def py_files() -> Tuple[pathlib.Path]:
 def pytest_generate_tests(metafunc):
     if "py_file" in metafunc.fixturenames:
         metafunc.parametrize("py_file", py_files())
+
+
+# =====
+import numpy as np
+
+@pytest.fixture(
+        params=[(1.0, 0.1, 1.0, np.array([1.0, 0.0]), np.arange(0, 5+1e-7, 1e-3)),
+            (2.0, 0.5, 4.0, np.array([0.5, 0.0]), np.arange(0, 10+1e-7, 1e-3)),])
+def m_c_k_xv0_t_array(request) -> Tuple[float, float, float, np.ndarray, np.ndarray]:
+    return request.param

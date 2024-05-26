@@ -112,13 +112,6 @@ def test_linear_slope(
     )
 
 
-@pytest.fixture(
-        params=[(1.0, 0.1, 1.0, np.array([1.0, 0.0]), np.arange(0, 5+1e-7, 1e-3)),
-            (2.0, 0.5, 4.0, np.array([0.5, 0.0]), np.arange(0, 10+1e-7, 1e-3)),])
-def m_c_k_xv0_t_array(request) -> Tuple[float, float, float, np.ndarray, np.ndarray]:
-    return request.param
-
-
 @pytest.fixture
 def exact_linear(m_c_k_xv0_t_array: Tuple[float, float, float, np.ndarray, np.ndarray]) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     m, c, k, xv0, t_array = m_c_k_xv0_t_array
