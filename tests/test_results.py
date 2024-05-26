@@ -37,7 +37,7 @@ def linear_damping_params(request) -> Tuple[float, float, float]:
 
 
 # Test function to check linear damping force calculation
-def test_linear_damping_force(linear_damping_params):
+def test_linear_damping_force(linear_damping_params: Tuple[float, float, float]):
     c, v, expected_force = linear_damping_params
     calculated_force = mch.linear_damping_force(c, v)
 
@@ -69,7 +69,7 @@ def test_linear_damping_force(linear_damping_params):
     (2.5, 0.0, 0.0),
     (1.2, -0.8, -1.2),
 ])
-def test_nonlinear_damping_force(c, v, expected_force):
+def test_nonlinear_damping_force(c:float, v:float, expected_force:float):
     calculated_force = mch.nonlinear_damping_force(c, v)
 
     msg_arg = (
