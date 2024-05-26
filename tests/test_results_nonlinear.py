@@ -124,5 +124,107 @@ def test_nonlinear_slope(
     )
 
 
+def test_nonlinear_solution(
+        m_c_k_xv0_t_array: Tuple[float, float, float, np.ndarray, np.ndarray],):
+
+    m, c, k, xv0, t_array = m_c_k_xv0_t_array
+
+    result = mch.nonlinear_solution(t_array, xv0, m, c, k)
+
+    # Basic checks
+    assert isinstance(result, dict), "Return value should be a dictionary"
+    assert set(result.keys()) == {"t_array", "n", "xv_array"}, "Dictionary keys are incorrect"
+    assert result["n"] == len(t_array), "n should be the length of t_array"
+    assert result["xv_array"].shape == (2, len(t_array)), "xv_array shape is incorrect"
+
+    # Assert the results (with input arguments in message)
+    msg_arg = (
+        f"Input: t={t_array.min()} ~ {t_array.max()}, xv0={xv0}, m={m}, c={c}, k={k}\n"  # Input args here
+    )
+
+    # Check if solution exhibits expected behavior
+    x, v = result["xv_array"]
+
+    # 1. Initial conditions are met
+    assert np.allclose(x[0], xv0[0], rtol=1e-6), (
+        f"{msg_arg}"
+        "Initial position is incorrect\n"
+        "초기 위치 확인 바랍니다\n"
+        f"Expected: ={xv0[0]}\n"
+        f"예상 결과: {xv0[0]}\n"
+        f"Got: {x[0]}\n"
+        f"반환된 값: {x[0]}"
+    )
+    assert np.allclose(v[0], xv0[1], rtol=1e-6), (
+        f"{msg_arg}"
+        "Initial velocity is incorrect\n"
+        "초기 속도 확인 바랍니다\n"
+        f"Expected: ={xv0[0]}\n"
+        f"예상 결과: {xv0[0]}\n"
+        f"Got: {x[0]}\n"
+        f"반환된 값: {x[0]}"
+    )
+
+    # 2. Check if t_array has the same values as input
+    assert np.allclose(result["t_array"], t_array), (
+        f"{msg_arg}"
+        "t_array should have the same value as input time array"
+        "t_array는 입력 시간 배열과 동일한 값을 가져야 합니다"
+    )
+
+    energy = calc_energy(m, k, x, v)
+    d_energy = np.diff(energy)
+
+    # 3. Energy should be decreasing
+    if not np.all(d_energy <= 1e-2):
+
+        i_where = np.argwhere(d_energy > 0)
+
+        plt.subplot(3, 1, 1)
+        plt.plot(t_array, energy, label="energy")
+
+        plt.scatter(t_array[i_where], energy[i_where], color='red', label="Increasing energy")
+
+        plt.xlabel("Time [s]")
+        plt.ylabel("Energy [J]")
+        plt.legend(loc=0)
+        plt.title("Energy should be decreasing")
+        plt.grid(True)
+
+        plt.subplot(3, 1, 2)
+        plt.plot(t_array, x, label="position")
+
+        plt.scatter(t_array[i_where], x[i_where], color='red', label="Increasing energy")
+
+        plt.xlabel("Time [s]")
+        plt.ylabel("x [m]")
+        plt.legend(loc=0)
+        plt.grid(True)
+
+        plt.subplot(3, 1, 3)
+        plt.plot(t_array, v, label="position")
+
+        plt.scatter(t_array[i_where], v[i_where], color='red', label="Increasing energy")
+
+        plt.xlabel("Time [s]")
+        plt.ylabel("v [m/s]")
+        plt.legend(loc=0)
+        plt.grid(True)
+
+        plt.savefig(f"nonlinear_energy_{m}.png")
+        plt.close()
+
+        pytest.fail(
+            f"{msg_arg}"
+            "Energy should be decreasing\n"
+            "에너지는 감소해야 합니다"
+            f"d_energy.max(): {d_energy.max()} at t = {t_array[np.argmax(energy)]}\n"
+        )
+
+
+def calc_energy(m:float, k:float, x:np.ndarray, v:np.ndarray) -> np.ndarray:
+    return 0.5*m*v**2 + 0.5*k*x**2
+
+
 if __name__ == "__main__":
     pytest.main([__file__])
