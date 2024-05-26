@@ -3,10 +3,14 @@ import random
 import sys
 from typing import Tuple
 
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pytest
 
+
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.absolute()))
+
 
 # Import the module containing the functions to be tested.
 # 테스트할 함수를 포함하는 모듈을 불러옵니다.
@@ -190,6 +194,101 @@ def test_nonlinear_slope(
         f"Got: dx/dt={calculated_slopes[0]}, dv/dt={calculated_slopes[1]}\n"
         f"반환된 값: dx/dt={calculated_slopes[0]}, dv/dt={calculated_slopes[1]}"
     )
+
+
+@pytest.fixture(
+        params=[(1.0, 0.1, 1.0, np.array([1.0, 0.0]), np.linspace(0, 5, 100)),
+            (2.0, 0.5, 4.0, np.array([0.5, 0.0]), np.linspace(0, 10, 200)),
+            (0.5, 0.2, 2.0, np.array([-1.0, 3.0]), np.linspace(0, 20, 500)),])
+def m_c_k_xv0_t_array(request) -> Tuple[float, float, float, np.ndarray, np.ndarray]:
+    return request.param
+
+
+@pytest.fixture
+def exact_linear(m_c_k_xv0_t_array: Tuple[float, float, float, np.ndarray, np.ndarray]) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    m, c, k, xv0, t_array = m_c_k_xv0_t_array
+
+    x0, v0 = xv0
+
+    A = (c*x0 + 2*m*v0 + x0 * (c**2 - 4 * k * m)**0.5) / (2 * (c**2 - 4 * k * m)**0.5)
+    B = (-c*x0 + (-2)*m*v0 + x0 * (c**2 - 4 * k * m)**0.5) / (2 * (c**2 - 4 * k * m)**0.5)
+
+    expA = t_array * (-c+(c**2 - 4*k*m)**0.5)/(2*m)
+    expB = (-1.0) * t_array * (c+(c**2 - 4*k*m)**0.5)/(2*m)
+
+    exact = A * np.exp(expA) + B * np.exp(expB)
+
+    return exact
+
+
+def test_linear_solution(
+        m_c_k_xv0_t_array: Tuple[float, float, float, np.ndarray, np.ndarray],
+        exact_linear: np.ndarray):
+
+    m, c, k, xv0, t_array = m_c_k_xv0_t_array
+
+    result = mch.linear_solution(t_array, xv0, m, c, k)
+
+    # Basic checks
+    assert isinstance(result, dict), "Return value should be a dictionary"
+    assert set(result.keys()) == {"t_array", "n", "xv_array"}, "Dictionary keys are incorrect"
+    assert result["n"] == len(t_array), "n should be the length of t_array"
+    assert result["xv_array"].shape == (2, len(t_array)), "xv_array shape is incorrect"
+
+    # Assert the results (with input arguments in message)
+    msg_arg = (
+        f"Input: t={t_array.min()} ~ {t_array.max()}, xv0={xv0}, m={m}, c={c}, k={k}\n"  # Input args here
+    )
+
+    # Check if solution exhibits expected behavior
+    x, v = result["xv_array"]
+
+    # 1. Initial conditions are met
+    assert np.allclose(x[0], xv0[0], rtol=1e-6), (
+        f"{msg_arg}"
+        "Initial position is incorrect\n"
+        "초기 위치 확인 바랍니다\n"
+        f"Expected: ={xv0[0]}\n"
+        f"예상 결과: {xv0[0]}\n"
+        f"Got: {x[0]}\n"
+        f"반환된 값: {x[0]}"
+    )
+    assert np.allclose(v[0], xv0[1], rtol=1e-6), (
+        f"{msg_arg}"
+        "Initial velocity is incorrect\n"
+        "초기 속도 확인 바랍니다\n"
+        f"Expected: ={xv0[0]}\n"
+        f"예상 결과: {xv0[0]}\n"
+        f"Got: {x[0]}\n"
+        f"반환된 값: {x[0]}"
+    )
+
+    # 2. Check if t_array has the same values as input
+    assert np.allclose(result["t_array"], t_array), (
+        f"{msg_arg}"
+        "t_array should have the same value as input time array"
+        "t_array는 입력 시간 배열과 동일한 값을 가져야 합니다"
+    )
+
+    # 3. Solution should be close to exact solution
+    if not np.allclose(exact_linear, x, rtol=1e-3):
+        plt.plot(t_array, x, label="Solution")
+        plt.plot(t_array, exact_linear, label="Exact solution")
+
+        plt.xlabel("Time [s]")
+        plt.ylabel("Position [m]")
+        plt.legend(loc=0)
+        plt.title("Linear solution outside the envelopes")
+        plt.savefig(f"linear_solution_envelopes_{m}.png")
+        plt.close()
+
+        pytest.fail(
+            f"{msg_arg}"
+            "Solution does not match the exact solution within the tolerance\n"
+            "해답이 허용 오차를 벗어났습니다\n"
+            "Please check the solution\n"
+            "해답을 확인 바랍니다"
+        )
 
 
 if __name__ == "__main__":
