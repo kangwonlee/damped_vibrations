@@ -92,12 +92,18 @@ def test_nonlinear_damping_force(c:float, v:float, expected_force:float):
 
     # Check if magnitude of the force is constant (equal to c)
     assert (
-        np.isclose(abs(calculated_force), expected_force, rtol=1e-6)
+        np.isclose(abs(calculated_force), abs(expected_force), rtol=1e-6)
         or (v == 0 and calculated_force == 0)
     ), (
-        f"{msg_arg}Magnitude of force should be equal to c\n"
-        f"힘의 크기는 c와 같아야 합니다"
+        f"{msg_arg}Please check the magnitude of force.\n"
+        f"힘의 크기를 확인 바랍니다."
+        f"{msg_arg}"
+        f"Expected: {expected_force}\n"
+        f"예상 결과 : {expected_force}\n"
+        f"Got: {calculated_force}\n"
+        f"반환값: {calculated_force}\n"
     )
+
 
 @pytest.mark.parametrize("t, x, v, m, c, k, expected_dxdt, expected_dvdt", [
     (0.0, 1.0, 2.0, 1.0, 0.5, 10.0, 2.0, -15.0),
