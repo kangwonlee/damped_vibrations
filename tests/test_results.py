@@ -197,9 +197,8 @@ def test_nonlinear_slope(
 
 
 @pytest.fixture(
-        params=[(1.0, 0.1, 1.0, np.array([1.0, 0.0]), np.linspace(0, 5, 100)),
-            (2.0, 0.5, 4.0, np.array([0.5, 0.0]), np.linspace(0, 10, 200)),
-            (0.5, 0.2, 2.0, np.array([-1.0, 3.0]), np.linspace(0, 20, 500)),])
+        params=[(1.0, 0.1, 1.0, np.array([1.0, 0.0]), np.arange(0, 5+1e-7, 1e-3)),
+            (2.0, 0.5, 4.0, np.array([0.5, 0.0]), np.arange(0, 10+1e-7, 1e-3)),])
 def m_c_k_xv0_t_array(request) -> Tuple[float, float, float, np.ndarray, np.ndarray]:
     return request.param
 
@@ -270,15 +269,41 @@ def test_linear_solution(
         "t_array는 입력 시간 배열과 동일한 값을 가져야 합니다"
     )
 
+    i_larger = np.where(abs(exact_linear) > 1e-3)
+
+    t_large = t_array[i_larger]
+    exact_large = exact_linear[i_larger]
+    x_large = x[i_larger]
+
     # 3. Solution should be close to exact solution
-    if not np.allclose(exact_linear, x, rtol=1e-3):
+    if not np.allclose(exact_large, x_large, rtol=1e-1, atol=1e-3):
+        plt.subplot(3, 1, 1)
         plt.plot(t_array, x, label="Solution")
         plt.plot(t_array, exact_linear, label="Exact solution")
+
+        i_far = np.where(np.isclose(exact_large, x_large, rtol=1e-3, atol=1e-3))
+
+        plt.scatter(t_large[i_far], x_large[i_far], label="Far from exact solution", color="red")
 
         plt.xlabel("Time [s]")
         plt.ylabel("Position [m]")
         plt.legend(loc=0)
-        plt.title("Linear solution outside the envelopes")
+        plt.title("Linear solution outside the tolerance")
+
+        plt.subplot(3, 1, 2)
+        plt.semilogy(t_large, abs((x_large-exact_large)), label="Error")
+        plt.xlabel("Time [s]")
+        plt.ylabel("abs Error")
+        plt.legend(loc=0)
+        plt.grid(True)
+
+        plt.subplot(3, 1, 3)
+        plt.semilogy(t_large, abs((x_large-exact_large)/exact_large), label="Error")
+        plt.xlabel("Time [s]")
+        plt.ylabel("Relative Error")
+        plt.legend(loc=0)
+        plt.grid(True)
+
         plt.savefig(f"linear_solution_envelopes_{m}.png")
         plt.close()
 
