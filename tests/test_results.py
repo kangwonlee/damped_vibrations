@@ -105,15 +105,50 @@ def test_nonlinear_damping_force(c:float, v:float, expected_force:float):
     )
 
 
-@pytest.mark.parametrize("t, x, v, m, c, k, expected_dxdt, expected_dvdt", [
-    (0.0, 1.0, 2.0, 1.0, 0.5, 10.0, 2.0, -15.0),
-    (2.5, -0.5, -1.0, 2.0, 1.5, 5.0, -1.0, 2.0),
-    (1.0, 0.0, 0.0, 0.8, 0.2, 8.0, 0.0, 0.0),
-])
-def test_linear_slope(t, x, v, m, c, k, expected_dxdt, expected_dvdt):
-    xv = np.array([x, v])  # Create the position-velocity array
+@pytest.mark.parametrize(
+    "t, x, v, m, c, k, expected_dxdt, expected_dvdt",
+    [
+        (0.0, 1.0, 2.0, 1.0, 0.5, 10.0, 2.0, -11.0),
+        (2.5, -0.5, -1.0, 2.0, 1.5, 5.0, -1.0, 2.0),
+        (1.0, 0.0, 0.0, 0.8, 0.2, 8.0, 0.0, 0.0),
+        (5.0, 3.0, 0.1, 0.5, 1.2, 6.0, 0.1, -36.24),
+    ],
+)
+def test_linear_slope(
+    t: float, x: float, v: float, m: float, c: float, k: float,
+    expected_dxdt: float, expected_dvdt: float,
+):
+    xv = np.array([x, v])
     calculated_slopes = mch.linear_slope(t, xv, m, c, k)
-    assert np.allclose(calculated_slopes, np.array([expected_dxdt, expected_dvdt]), rtol=1e-6)
+
+    # Assert the results (with input arguments in message)
+    msg_arg = f"Input: t={t}, x={x}, v={v}, m={m}, c={c}, k={k}\n"
+
+    assert isinstance(calculated_slopes, np.ndarray), (
+        f"{msg_arg}"
+        "Expected type: numpy.ndarray\n"
+        "예상 자료형: numpy.ndarray\n"
+        f"Got type: {type(calculated_slopes)}\n"
+        f"받은 자료형: {type(calculated_slopes)}\n"
+    )
+
+    assert calculated_slopes.shape == (2,), (
+        f"{msg_arg}"
+        "Expected shape: (2,)\n"
+        "예상 행렬 수: (2,)\n"  # Corrected translation for "shape"
+        f"Got shape: {calculated_slopes.shape}\n"
+        f"받은 행렬 수: {calculated_slopes.shape}\n"
+    )
+
+    assert np.allclose(
+        calculated_slopes, np.array([expected_dxdt, expected_dvdt]), rtol=1e-6
+    ), (
+        f"{msg_arg}"
+        f"Expected: dx/dt={expected_dxdt}, dv/dt={expected_dvdt}\n"
+        f"예상 결과: dx/dt={expected_dxdt}, dv/dt={expected_dvdt}\n"
+        f"Got: dx/dt={calculated_slopes[0]}, dv/dt={calculated_slopes[1]}\n"
+        f"반환된 값: dx/dt={calculated_slopes[0]}, dv/dt={calculated_slopes[1]}"
+    )
 
 
 if __name__ == "__main__":
