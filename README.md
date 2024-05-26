@@ -1,46 +1,42 @@
 
+
 # Investigating Linear and Nonlinear Damping in Oscillatory Systems<br>선형 비선형 감쇠진동 시스템 조사
 
-"This just in! SNL's top field reporter is live at Dunder Mifflin's Scranton branch, where employees are experiencing a bizarre phenomenon: unexplained oscillations causing chaos throughout the office.  Sources say the vibrations are so intense that Dwight Schrute's bobblehead collection has been knocked off its shelf, and Stanley Hudson's crossword puzzle is now completely illegible. We're here to investigate the source of these oscillations and determine if they're a threat to the company's productivity (and sanity)."
+This project explores the behavior of oscillating systems under the influence of two types of damping:<br>이 과제는 아래 두 종류의 감쇠에 영향을 받는 진동 시스템의 행동을 알아보고자 합니다:
 
-안녕하십니까, 시청자 여러분. 저는 SNL 특파원 주 기자입니다! 지금 막 무한상사에서 긴급 상황이 발생했습니다. 유재석 부장님의 격렬한 춤사위와 정준하 과장님의 폭풍 먹방으로 인해 사무실 전체가 흔들리고 있습니다. 이 엄청난 진동은 마치 지진이라도 난 듯 책상과 의자를 덜덜 떨게 만들고 있습니다.
+1. Linear Damping: The damping force is directly proportional to the velocity of the oscillating object.<br>선형 감쇠 : 감쇠력은 진동하는 물체의 속도에 정확히 선형적으로 비례합니다.
+1. Nonlinear Damping: The damping force is not linearly related to the velocity and often exhibits more complex behavior.<br>비선형 감쇠 : 감쇠력은 속도와 선형적으로 비례하지 않으며 많은 경우 더 복잡한 행동을 보입니다.
 
-하지만, 걱정하지 마십시오! 우리에겐 든든한 지원군, 파이썬의 `solve_ivp` 함수가 있습니다. 이 강력한 도구를 활용하면, 이 혼돈 속에서도 진동의 패턴을 분석하고 예측할 수 있습니다.
+## Problem Description<br>문제 설명
 
-**지금부터 저와 함께, 무한상사의 진동 현장을 수치해석으로 파헤쳐 봅시다!**
+We will model two scenarios involving an oscillating system (like a mass on a spring):<br>임의의 진동계 (스프링과 연결된 질량 같은) 에 관한 두 가지 시나리오를 살펴보겠습니다.
 
-## Problem Description<br>현장 상황
+1. Scenario 1: Linear damping where the damping force is proportional to the velocity.<br>시나리오 1: 감쇠력이 속도에 선형적으로 비례하는 선형 감쇠일 것이다.
+1. Scenario 2: Nonlinear damping where the damping force is proportional to the sign of the velocity.<br>시나리오 2: 감쇠력이 속도의 **부호**에 비례하는 비선형 감쇠일 것이다.
 
-"Our sources have identified two potential culprits behind the Dunder Mifflin mayhem:
+Our goal is to use numerical methods to solve the ordinary differential equations (ODEs) that describe these systems and analyze the resulting motion.<br>우리의 목표는 이러한 시스템을 묘사하는 상미분 방정식(ODEs)의 해를 수치적인 방법으로 구하고, 그 결과로 나타나는 거동을 분석하는 것입니다.
 
-1. Kevin's Chili Calamity (Linear Damping): Kevin Malone, the office's resident chili enthusiast, accidentally spilled a massive pot of his famous chili on the breakroom floor. The resulting waves of chili are causing the floor to oscillate, with the linoleum providing a linear damping force.<br>유재석 부장님의 댄스 타임: 유 부장님의 현란한 춤 동작은 책상을 좌우로 흔들리게 만들고 있습니다. 이 움직임은 시간이 지날수록 점차 줄어드는 선형 감쇠 진동으로 볼 수 있습니다. 마치 흥겨운 댄스곡이 끝나고 차분한 음악으로 넘어가는 것처럼 말이죠.
-1. Michael's Motivational Mayhem (Nonlinear Damping): Michael Scott, the self-proclaimed "World's Best Boss," has been conducting a series of impromptu motivational speeches and team-building exercises. The resulting chaos and confusion have caused the office to vibrate erratically, with a damping force that seems as unpredictable as Michael himself.<br>정준하 과장님의 먹방 퍼레이드: 정 과장님이 짜장면을 흡입하는 모습은 마치 진공청소기 같습니다. 이 엄청난 먹방은 의자를 앞뒤로 격렬하게 움직이게 만들고 있습니다. 이 움직임은 예측하기 어려운 비선형 감쇠 진동으로, 마치 박명수 차장님의 급발진 잔소리처럼 갑작스럽고 강렬합니다.
+## Implementations<br>구현 사항
 
-Our team of expert analysts will be using Python's `solve_ivp` function to model these scenarios and determine the nature of the damping forces at play. We'll also be interviewing key witnesses (and potential suspects) to get to the bottom of this bizarre situation."
- 
-**특종! 여러분도 수치해석 전문가가 될 수 있습니다!**
-
-## Tasks<br>미션
-
-1. Field Reporter's Toolkit: Get your Python environment set up with `solve_ivp` ready for action. It's time to channel your inner investigative journalist and uncover the truth behind the Dunder Mifflin oscillations.
-
-1. Implement Damping Functions:<br>감쇠 함수 구현
+1. Implement Damping Functions:<br>감쇠 함수 구현:
 
     * Write a function `linear_damping_force(v, c)` that returns the linear damping force `c*v`, where `v` is the velocity and `c` is the damping coefficient.<br>`linear_damping_force(v, c)`: 선형 감쇠력 `c * v` 를 반환하는 함수 (`v`는 속도, `c`는 감쇠 계수).
     * Write a function `nonlinear_damping_force(v, c)` that returns the nonlinear damping force `c*sign(v)`, where `sign(v)` is the signum function (`-1` for negative `v`, `0` for zero `v`, and `1` for positive `v`).<br>`nonlinear_damping_force(v, c)`: 비선형 감쇠력 `c * sign(v)`를 반환하는 함수 (`sign(v)`는 부호 함수)
 
+1. Define ODE Slopes (Derivatives):<br>상미분 방정식의 기울기 함수 구현:
+
+    * Write a function `linear_slope(t, xv, m, c, k)` that returns the derivatives of position and velocity for the linear damping scenario. The input `xv` is an array containing the position and velocity at time `t`.<br>`linear_slope(t, xv, m, c, k)`: 선형 감쇠 시나리오에 대한 위치와 속도의 미분을 반환하는 함수. 입력 `xv`는 시간 `t`에서의 위치와 속도를 담은 배열.
+    * WWrite a function `nonlinear_damping_solution(t_eval, m, k, c, x0, v0)` that does the same for the nonlinear damping scenario.<br>`nonlinear_damping_solution(t_eval, m, k, c, x0, v0)`: 비선형 감쇠 시나리오에 대한 위치와 속도의 미분을 반환하는 함수.
+
 1. Solve the ODEs:<br>ODE의 해 곡선:
 
-    * Write a function `linear_damping_solution(t_eval, m, k, c, x0, v0)` that uses `solve_ivp` to solve the ODE for Kevin's chili spill with linear damping and returns the solution at specified time points `t_eval`.
-    * Write a function `nonlinear_damping_solution(t_eval, m, k, c, x0, v0)` that does the same for Meredith's office chair race with nonlinear damping.
-(Note: `m` is the mass, `k` is the spring constant, `x0` is the initial displacement, and `v0` is the initial velocity.)
+    * Write a function `linear_damping_solution(t_eval, m, k, c, x0, v0)` that uses `solve_ivp` from `SciPy` to solve the ODE for Scenario 1 (linear damping) and returns the solution at specified time points t_eval.<br>`linear_damping_solution(t_eval, m, k, c, x0, v0)`: `SciPy`의 `solve_ivp`를 사용하여 시나리오 1 (선형 감쇠)에 대한 상미분방정식의 해를 구하고 지정된 시점 `t_eval`에서의 해를 반환합니다.
+    * WWrite a function `nonlinear_damping_solution(t_eval, m, k, c, x0, v0)` that does the same for Scenario 2 (nonlinear damping).<br>`nonlinear_damping_solution(t_eval, m, k, c, x0, v0)`: 시나리오 2 (비선형 감쇠)에 대한 해를 반환하는 함수.
 
-1. Breaking News Analysis:<br>결과 분석 및 비교:
+1. Analysis and Visualization:<br>분석과 시각화:
 
-    * Plot and compare the displacement $x(t)$ and velocity $\frac{d}{dt}x(t)$ for both scenarios over a suitable time interval.<br>두 시나리오에 대한 변위 $x(t)$와 속도 $\frac{d}{dt}x(t)$를 그래프로 나타내고 비교 분석합니다.
-    * Discuss the observed differences and their physical interpretations in the context of "The Office." For example, you could relate the smooth decay of linear damping to Jim's calm demeanor and the erratic behavior of nonlinear damping to Michael's chaotic energy.<br>선형 감쇠와 비선형 감쇠의 차이점을 "무한상사"의 관점에서 이해해봅시다. 예를 들어 선형 감쇠의 부드러운 진폭 감소를 유재석 부장의 차분한 태도와 연결지어 생각해 볼 수 있고, 비선형 감쇠의 불규칙한 행동을 박명수 차장의 에너지 넘친 급발진과 비교해 볼 수도 있을 것입니다.
-
-1. Exclusive Interview (Bonus):  For those who want to go the extra mile, conduct a mock interview with a Dunder Mifflin employee (played by you or a friend). Get their perspective on the oscillations and their potential impact on office productivity. Extra points for incorporating iconic quotes and mannerisms from the show.
+    * Plot and compare the displacement $x(t)$ and velocity $\frac{d}{dt}x(t)$ for both scenarios over a suitable time interval.<br>두 시나리오에 대한 변위 $x(t)$와 속도 $\frac{d}{dt}x(t)$를 그래프로 나타내고 비교 분석합시다.
+    * Compare and contrast the behavior of the two systems. How does the damping affect the amplitude and frequency of the oscillations?<br>두 시스템의 행동을 비교 분석합니다. 감쇠가 진동의 진폭과 주파수에 어떤 영향을 미치는지 설명해 봅시다.
 
 ### File Table<br>파일 목록
 
@@ -100,7 +96,6 @@ Our team of expert analysts will be using Python's `solve_ivp` function to model
 | `numpy` | numpy |
 | `scipy.integrate` | numerical solver<br>수치 해법 |
 
-
 ## Grading<br>채점 기준 (총 5점)
 
 * Description of the grading.<br>평가에 대한 설명입니다.
@@ -121,8 +116,6 @@ Our team of expert analysts will be using Python's `solve_ivp` function to model
 
 * Harmonic oscillator / Damped harmonic oscillator [[wiki](https://en.wikipedia.org/wiki/Harmonic_oscillator#Damped_harmonic_oscillator)]<br>조화진동자 / 감쇠진동 [[wiki](https://ko.wikipedia.org/wiki/조화_진동자#감쇠_진동)]
 * scipy.integrate.solve_ivp() [[link](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html)].
-
-**시청자 여러분, 감쇠 진동의 세계는 결코 지루하지 않습니다! 여러분의 빛나는 수치해석 실력으로 무한상사의 진동 문제를 해결하고, 숨겨진 진실을 밝혀내세요! 이상, SNL 특파원 주 기자였습니다!**
 
 ## Notes
 
