@@ -1,5 +1,5 @@
 
-# Breaking News: Dunder Mifflin Plagued by Mysterious Oscillations!<br>속보입니다! 긴급 진동 발생! SNL 수치해석 특별 방송!
+# Investigating Linear and Nonlinear Damping in Oscillatory Systems<br>선형 비선형 감쇠진동 시스템 조사
 
 "This just in! SNL's top field reporter is live at Dunder Mifflin's Scranton branch, where employees are experiencing a bizarre phenomenon: unexplained oscillations causing chaos throughout the office.  Sources say the vibrations are so intense that Dwight Schrute's bobblehead collection has been knocked off its shelf, and Stanley Hudson's crossword puzzle is now completely illegible. We're here to investigate the source of these oscillations and determine if they're a threat to the company's productivity (and sanity)."
 
