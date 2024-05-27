@@ -218,7 +218,36 @@ def test_nonlinear_solution(
             f"{msg_arg}"
             "Energy should be decreasing\n"
             "에너지는 감소해야 합니다"
-            f"d_energy.max(): {d_energy.max()} at t = {t_array[np.argmax(energy)]}\n"
+            f"d_energy.max(): {d_energy.max()} at t = {t_array[np.argmax(d_energy)]}\n"
+        )
+
+    # 4. Energy dissipation would be related to the dissipation by damping force
+
+    d_energy_dt = d_energy / t_array[1]
+
+    dissipation = c * np.abs(v)
+
+    delta_dedt_dissp = d_energy_dt + dissipation[:-1]
+
+    if delta_dedt_dissp.max() >= 0.01:
+
+        plt.subplot(2, 1, 1)
+        plt.plot(t_array[:-1] , d_energy_dt, label='dE/dt')
+        plt.plot(t_array , -dissipation, label='-dissipation')
+        plt.grid(True)
+
+        plt.subplot(2, 1, 2)
+        plt.plot(t_array[:-1] , delta_dedt_dissp, label='error')
+        plt.grid(True)
+
+        plt.savefig(f'de_dt_{m}.png')
+        plt.close()
+
+        pytest.fail(
+            f"{msg_arg}"
+            "Energy rate should be close to the dissipation by the damping\n"
+            "에너지 감소율은 감쇠에 의한 소산에 가까와아 합니다"
+            f"max error : {delta_dedt_dissp.max()} at t = {t_array[np.argmax(delta_dedt_dissp)]}\n"
         )
 
 
