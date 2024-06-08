@@ -93,8 +93,8 @@ jobs:
       env:
         CHECK-GRAMMAR_RESULTS: "${{steps.check-grammar.outputs.result}}"
         ALL-LINES-IN-THE-FUNCTION_RESULTS: "${{steps.all-lines-in-the-function.outputs.result}}"
-        test-results-linear_RESULTS: "${{steps.test-results-linear.outputs.result}}"
-        test-results-nonlinear_RESULTS: "${{steps.test-results-nonlinear.outputs.result}}"
+        TEST-RESULTS-LINEAR_RESULTS: "${{steps.test-results-linear.outputs.result}}"
+        TEST-RESULTS-NONLINEAR_RESULTS: "${{steps.test-results-nonlinear.outputs.result}}"
       with:
         runners: check-grammar,all-lines-in-the-function,test-results-linear,test-results-nonlinear
 
