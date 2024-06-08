@@ -64,27 +64,27 @@ jobs:
       with:
         test-name: all lines in the function
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest tests/test_all_lines_in_the_function.py"
+        command: ". test-env/bin/activate && python -m pytest tests/test_lines_in_function.py.py"
         timeout: 1
         max-score: 1
 
     - name: test result
-      id: test-result
+      id: test-results-linear
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: test result
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest -n auto tests/test_results.py"
+        command: ". test-env/bin/activate && python -m pytest -n auto tests/test_results_linear.py"
         timeout: 2
         max-score: 2
 
     - name: test comparison
-      id: test-comparison
+      id: test-results-linears-nonlinear
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: test comparison
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest -n auto tests/test_comparison.py"
+        command: ". test-env/bin/activate && python -m pytest -n auto tests/test_results_nonlinear.py"
         timeout: 2
         max-score: 1
 
@@ -93,10 +93,10 @@ jobs:
       env:
         CHECK-GRAMMAR_RESULTS: "${{steps.check-grammar.outputs.result}}"
         ALL-LINES-IN-THE-FUNCTION_RESULTS: "${{steps.all-lines-in-the-function.outputs.result}}"
-        TEST-COMPARISON_RESULTS: "${{steps.test-comparison.outputs.result}}"
-        TEST-RESULT_RESULTS: "${{steps.test-result.outputs.result}}"
+        test-results-linear_RESULTS: "${{steps.test-results-linear.outputs.result}}"
+        test-results-linears-nonlinear_RESULTS: "${{steps.test-results-linears-nonlinear.outputs.result}}"
       with:
-        runners: check-grammar,all-lines-in-the-function,test-result,test-comparison
+        runners: check-grammar,all-lines-in-the-function,test-results-linear,test-results-linears-nonlinear
 
     - name: upload pngs as artifacts
       id: png-artifacts
