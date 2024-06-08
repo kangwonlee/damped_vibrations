@@ -64,25 +64,25 @@ jobs:
       with:
         test-name: all lines in the function
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest tests/test_lines_in_function.py.py"
+        command: ". test-env/bin/activate && python -m pytest tests/test_lines_in_function.py"
         timeout: 1
         max-score: 1
 
-    - name: test result
+    - name: test result linear
       id: test-results-linear
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: test result
+        test-name: test result linear
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
         command: ". test-env/bin/activate && python -m pytest -n auto tests/test_results_linear.py"
         timeout: 2
         max-score: 2
 
-    - name: test comparison
+    - name: test result nonlinear
       id: test-results-nonlinear
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: test comparison
+        test-name: test result nonlinear
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
         command: ". test-env/bin/activate && python -m pytest -n auto tests/test_results_nonlinear.py"
         timeout: 2
