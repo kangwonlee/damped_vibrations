@@ -54,7 +54,7 @@ jobs:
       with:
         test-name: check grammar
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest tests/test_grammar.py"
+        command: ". test-env/bin/activate && python -m pytest --json-report --json-report-file=report_grammar.json tests/test_grammar.py"
         timeout: 1
         max-score: 1
 
@@ -64,7 +64,7 @@ jobs:
       with:
         test-name: all lines in the function
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest tests/test_lines_in_function.py"
+        command: ". test-env/bin/activate && python -m pytest --json-report --json-report-file=report_lines.json tests/test_lines_in_function.py"
         timeout: 1
         max-score: 1
 
@@ -74,7 +74,7 @@ jobs:
       with:
         test-name: test result linear
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest -n auto tests/test_results_linear.py"
+        command: ". test-env/bin/activate && python -m pytest -n auto --json-report --json-report-file=report_linear.json tests/test_results_linear.py"
         timeout: 2
         max-score: 2
 
@@ -84,7 +84,7 @@ jobs:
       with:
         test-name: test result nonlinear
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest -n auto tests/test_results_nonlinear.py"
+        command: ". test-env/bin/activate && python -m pytest -n auto --json-report --json-report-file=report_nonlinear.json tests/test_results_nonlinear.py"
         timeout: 2
         max-score: 1
 
@@ -105,5 +105,15 @@ jobs:
       with:
         name: plots
         path: ./*.png
+        retention-days: 21
+        overwrite: true
+
+    - name: upload json reports as artifacts
+      id: json-artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: reports
+        path: ./*.json
         retention-days: 21
         overwrite: true
