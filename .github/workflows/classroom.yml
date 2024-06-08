@@ -79,7 +79,7 @@ jobs:
         max-score: 2
 
     - name: test comparison
-      id: test-results-linears-nonlinear
+      id: test-results-nonlinear
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: test comparison
@@ -94,9 +94,9 @@ jobs:
         CHECK-GRAMMAR_RESULTS: "${{steps.check-grammar.outputs.result}}"
         ALL-LINES-IN-THE-FUNCTION_RESULTS: "${{steps.all-lines-in-the-function.outputs.result}}"
         test-results-linear_RESULTS: "${{steps.test-results-linear.outputs.result}}"
-        test-results-linears-nonlinear_RESULTS: "${{steps.test-results-linears-nonlinear.outputs.result}}"
+        test-results-nonlinear_RESULTS: "${{steps.test-results-nonlinear.outputs.result}}"
       with:
-        runners: check-grammar,all-lines-in-the-function,test-results-linear,test-results-linears-nonlinear
+        runners: check-grammar,all-lines-in-the-function,test-results-linear,test-results-nonlinear
 
     - name: upload pngs as artifacts
       id: png-artifacts
