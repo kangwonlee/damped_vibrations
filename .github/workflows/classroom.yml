@@ -48,23 +48,31 @@ jobs:
         echo $VIRTUAL_ENV
         pip install -r requirements.txt
 
-    - name: check grammar
-      id: check-grammar
+    - name: Set report file names
+      id: json
+      run: |
+        echo "syntax=report_syntax.json" >> $GITHUB_OUTPUT
+        echo "style=report_style.json" >> $GITHUB_OUTPUT
+        echo "results_linear=report_results_linear.json" >> $GITHUB_OUTPUT
+        echo "results_nonlinear=report_results_nonlinear.json" >> $GITHUB_OUTPUT
+
+    - name: check syntax
+      id: check-syntax
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: check grammar
+        test-name: check syntax
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest --json-report --json-report-file=report_grammar.json tests/test_grammar.py"
+        command: ". test-env/bin/activate && python -m pytest --json-report --json-report-indent=4 --json-report-file=${{ steps.json.outputs.syntax }} tests/test_syntax.py"
         timeout: 1
         max-score: 1
 
-    - name: all lines in the function
-      id: all-lines-in-the-function
+    - name: check style
+      id: check-style
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: all lines in the function
+        test-name: style
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest --json-report --json-report-file=report_lines.json tests/test_lines_in_function.py"
+        command: ". test-env/bin/activate && python -m pytest --json-report --json-report-indent=4 --json-report-file=${{ steps.json.outputs.style }} tests/test_lines_in_function.py"
         timeout: 1
         max-score: 1
 
@@ -74,7 +82,7 @@ jobs:
       with:
         test-name: test result linear
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest -n auto --json-report --json-report-file=report_linear.json tests/test_results_linear.py"
+        command: ". test-env/bin/activate && python -m pytest -n auto --json-report --json-report-indent=4 --json-report-file=${{ steps.json.outputs.results_linear }} tests/test_results_linear.py"
         timeout: 2
         max-score: 2
 
@@ -84,36 +92,40 @@ jobs:
       with:
         test-name: test result nonlinear
         setup-command: ". test-env/bin/activate && echo $VIRTUAL_ENV && python -m pip list"
-        command: ". test-env/bin/activate && python -m pytest -n auto --json-report --json-report-file=report_nonlinear.json tests/test_results_nonlinear.py"
+        command: ". test-env/bin/activate && python -m pytest -n auto --json-report --json-report-indent=4 --json-report-file=${{ steps.json.outputs.results_nonlinear }} tests/test_results_nonlinear.py"
         timeout: 2
         max-score: 1
 
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        CHECK-GRAMMAR_RESULTS: "${{steps.check-grammar.outputs.result}}"
-        ALL-LINES-IN-THE-FUNCTION_RESULTS: "${{steps.all-lines-in-the-function.outputs.result}}"
+        CHECK-SYNTAX_RESULTS: "${{steps.check-syntax.outputs.result}}"
+        CHECK-STYLE_RESULTS: "${{steps.check-style.outputs.result}}"
         TEST-RESULTS-LINEAR_RESULTS: "${{steps.test-results-linear.outputs.result}}"
         TEST-RESULTS-NONLINEAR_RESULTS: "${{steps.test-results-nonlinear.outputs.result}}"
       with:
-        runners: check-grammar,all-lines-in-the-function,test-results-linear,test-results-nonlinear
+        runners: check-syntax,check-style,test-results-linear,test-results-nonlinear
 
-    - name: upload pngs as artifacts
-      id: png-artifacts
+    - name: AI Tutor
+      uses: kangwonlee/gemini-python-tutor@main
+      with:
+        report-files: ${{ steps.json.outputs.results_linear }},${{ steps.json.outputs.results_nonlinear }},${{ steps.json.outputs.syntax }},${{ steps.json.outputs.style }}
+        student-files: exercise.py
+        readme-path: README.md
+        api-key: ${{ secrets.GOOGLE_API_KEY }}
+        explanation-in: Korean
+      id: ai-tutor
+      if: always()
+      timeout-minutes: 2
+
+    - name: upload artifacts
+      id: artifacts
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: plots
-        path: ./*.png
-        retention-days: 21
-        overwrite: true
-
-    - name: upload json reports as artifacts
-      id: json-artifacts
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: reports
-        path: ./*.json
+        name: artifacts
+        path: |
+          ./*.png
+          ./*.json
         retention-days: 21
         overwrite: true

@@ -102,7 +102,7 @@ Our goal is to use numerical methods to solve the ordinary differential equation
 
 | Criteria<br>기준	| Points<br>배점 |
 |:---------:|:------:|
-| Python Grammar<br>Python 문법	| 1 |
+| Python Syntax<br>Python 문법	| 1 |
 | Coding Style<br>모든 코드는 함수 안에	| 1 |
 | Linear Results<br>선형 감쇠 결과	| 2 |
 | Nonlinear Results<br>비선형 감쇠 결과	| 1 |
