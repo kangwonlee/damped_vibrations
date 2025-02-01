@@ -117,6 +117,8 @@ Our goal is to use numerical methods to solve the ordinary differential equation
 * Harmonic oscillator / Damped harmonic oscillator [[wiki](https://en.wikipedia.org/wiki/Harmonic_oscillator#Damped_harmonic_oscillator)]<br>조화진동자 / 감쇠진동 [[wiki](https://ko.wikipedia.org/wiki/조화_진동자#감쇠_진동)]
 * scipy.integrate.solve_ivp() [[link](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html)].
 
+``From here is common to all assignments.``
+
 ## Notes
 
 * This assignment was developed with the assistance of an AI language model for creative inspiration and guidance, demonstrating the potential of AI as a tool to enhance learning and problem-solving.  Students are encouraged to use AI responsibly and ethically, always prioritizing their own understanding and critical thinking.
@@ -128,3 +130,5 @@ Our goal is to use numerical methods to solve the ordinary differential equation
 * The submissions will be anonymized and used solely for educational or research purposes. No personally identifiable information will be shared.<br>제출된 결과물은 익명화되어 교육 및 연구 목적으로만 사용되며, 개인 식별 정보는 공유되지 않을 것입니다.
 
 * If you do not wish to have your submission used for any of these purposes, please inform the instructor before the assignment deadline.<br>위와 같은 목적으로 사용되기 원하지 않는 경우, 과제 마감일 전에 강사에게 알려주기 바랍니다.
+
+``Until here is common to all assignments.``
