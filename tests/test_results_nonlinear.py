@@ -15,7 +15,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.absolute()))
 # Import the module containing the functions to be tested.
 # 테스트할 함수를 포함하는 모듈을 불러옵니다.
 try:
-    import my_code_here as mch
+    import exercise
 except ImportError as e:
     pytest.fail(
         f"Error importing 'my_code_here': {e}"
@@ -48,7 +48,7 @@ def linear_damping_params(request) -> Tuple[float, float, float]:
     (1.2, -0.8, -1.2),
 ])
 def test_nonlinear_damping_force(c:float, v:float, expected_force:float):
-    calculated_force = mch.nonlinear_damping_force(c, v)
+    calculated_force = exercise.nonlinear_damping_force(c, v)
 
     msg_arg = (
         f"input arguments: c = {c:g}, v = {v:g}\n"
@@ -94,7 +94,7 @@ def test_nonlinear_slope(
         t:float, x:float, v:float, m:float, c:float, k:float,
         expected_dxdt:float, expected_dvdt:float):
     xv = np.array([x, v])
-    calculated_slopes = mch.nonlinear_slope(t, xv, m, c, k)
+    calculated_slopes = exercise.nonlinear_slope(t, xv, m, c, k)
 
     # Assert the results (with input arguments in message)
     msg_arg = (
@@ -129,7 +129,7 @@ def test_nonlinear_solution(
 
     m, c, k, xv0, t_array = m_c_k_xv0_t_array
 
-    result = mch.nonlinear_solution(t_array, xv0, m, c, k)
+    result = exercise.nonlinear_solution(t_array, xv0, m, c, k)
 
     # Basic checks
     assert isinstance(result, dict), "Return value should be a dictionary"

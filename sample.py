@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-import my_code_here as mch
+import exercise
 
 
 def sample_main():
@@ -24,8 +24,8 @@ def sample_main():
     plot_damping_force(c_Npmps, v_mps)
 
     print(
-        f"linear slope example = {mch.linear_slope(t_sec, xv, m_kg, c_Npmps, k_Npm)}[N]\n"
-        f"nonlinear slope example = {mch.nonlinear_slope(t_sec, xv, m_kg, c_Npmps, k_Npm)}[N]\n"
+        f"linear slope example = {exercise.linear_slope(t_sec, xv, m_kg, c_Npmps, k_Npm)}[N]\n"
+        f"nonlinear slope example = {exercise.nonlinear_slope(t_sec, xv, m_kg, c_Npmps, k_Npm)}[N]\n"
     )
 
     plot_xv_array(m_kg, c_Npmps, k_Npm, t_array_sec, xv0)
@@ -34,8 +34,8 @@ def sample_main():
 def plot_damping_force(c_Npmps:float, v_mps:float):
     v_array_mps = np.linspace(-v_mps, v_mps, 101)
 
-    linear_c_array_N = mch.linear_damping_force(c_Npmps, v_array_mps)
-    nonlinear_c_array_N = mch.nonlinear_damping_force(c_Npmps, v_array_mps)
+    linear_c_array_N = exercise.linear_damping_force(c_Npmps, v_array_mps)
+    nonlinear_c_array_N = exercise.nonlinear_damping_force(c_Npmps, v_array_mps)
 
     # plot v vs damping force
     plt.clf()
@@ -49,8 +49,8 @@ def plot_damping_force(c_Npmps:float, v_mps:float):
 
 
 def plot_xv_array(m_kg, c_Npmps, k_Npm, t_array_sec, xv0):
-    d_linear = mch.linear_solution(t_array_sec, xv0, m_kg, c_Npmps, k_Npm)
-    d_nonlinear = mch.nonlinear_solution(t_array_sec, xv0, m_kg, c_Npmps, k_Npm)
+    d_linear = exercise.linear_solution(t_array_sec, xv0, m_kg, c_Npmps, k_Npm)
+    d_nonlinear = exercise.nonlinear_solution(t_array_sec, xv0, m_kg, c_Npmps, k_Npm)
 
     xv_linear = d_linear['xv_array']
     xv_nonlinear = d_nonlinear['xv_array']

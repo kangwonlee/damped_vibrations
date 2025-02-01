@@ -49,8 +49,8 @@ def test_allowed_imports(py_file:pathlib.Path, allowed_modules:Tuple[str]):
 
 
 def test_importable():
-    import my_code_here
-    assert my_code_here is not None
+    import exercise
+    assert exercise is not None
 
 
 if __name__ == "__main__":

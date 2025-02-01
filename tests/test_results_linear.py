@@ -15,7 +15,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.absolute()))
 # Import the module containing the functions to be tested.
 # 테스트할 함수를 포함하는 모듈을 불러옵니다.
 try:
-    import my_code_here as mch
+    import exercise
 except ImportError as e:
     pytest.fail(
         f"Error importing 'my_code_here': {e}"
@@ -43,7 +43,7 @@ def linear_damping_params(request) -> Tuple[float, float, float]:
 # Test function to check linear damping force calculation
 def test_linear_damping_force(linear_damping_params: Tuple[float, float, float]):
     c, v, expected_force = linear_damping_params
-    calculated_force = mch.linear_damping_force(c, v)
+    calculated_force = exercise.linear_damping_force(c, v)
 
     msg_arg = (
         f"input arguments: c = {c:g}, v = {v:g}\n"
@@ -80,7 +80,7 @@ def test_linear_slope(
     expected_dxdt: float, expected_dvdt: float,
 ):
     xv = np.array([x, v])
-    calculated_slopes = mch.linear_slope(t, xv, m, c, k)
+    calculated_slopes = exercise.linear_slope(t, xv, m, c, k)
 
     # Assert the results (with input arguments in message)
     msg_arg = f"Input: t={t}, x={x}, v={v}, m={m}, c={c}, k={k}\n"
@@ -135,7 +135,7 @@ def test_linear_solution(
 
     m, c, k, xv0, t_array = m_c_k_xv0_t_array
 
-    result = mch.linear_solution(t_array, xv0, m, c, k)
+    result = exercise.linear_solution(t_array, xv0, m, c, k)
 
     # Basic checks
     assert isinstance(result, dict), "Return value should be a dictionary"
