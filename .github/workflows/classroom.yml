@@ -107,7 +107,7 @@ jobs:
         runners: check-syntax,check-style,test-results-linear,test-results-nonlinear
 
     - name: AI Tutor
-      uses: kangwonlee/gemini-python-tutor@main
+      uses: docker://ghcr.io/kangwonlee/gemini-python-tutor:latest
       with:
         report-files: ${{ steps.json.outputs.results_linear }},${{ steps.json.outputs.results_nonlinear }},${{ steps.json.outputs.syntax }},${{ steps.json.outputs.style }}
         student-files: exercise.py
