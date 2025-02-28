@@ -1,6 +1,8 @@
+import os
 import pathlib
 import random
 import sys
+
 from typing import Tuple
 
 
@@ -9,7 +11,15 @@ import numpy as np
 import pytest
 
 
-sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.absolute()))
+sys.path.insert(
+    0,
+    os.getenv(
+        'STUDENT_CODE_FOLDER',
+        str(
+            pathlib.Path(__file__).parent.parent.absolute()
+        )
+    )
+)
 
 
 # Import the module containing the functions to be tested.
